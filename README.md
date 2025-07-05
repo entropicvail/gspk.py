@@ -20,7 +20,8 @@ ollama pull llama3:8b
 ```
 ```
 sudo apt update && sudo apt install mpg321 -y
-``````
+```
+```
 source ./venv/bin/activate
 ```
 ```
