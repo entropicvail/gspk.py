@@ -1,3 +1,4 @@
+import readline
 import requests
 from gtts import gTTS
 import subprocess
