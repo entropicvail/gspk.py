@@ -49,7 +49,8 @@ def stop_ollama_prompt():
     if answer == "n":
         print("Stopping Ollama...")
         try:
-            subprocess.run(["pkill", "-f", "ollama"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(["sudo", "systemctl", "stop", "ollama.service"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(["sudo", "systemctl", "disable", "ollama.service"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             print("Ollama stopped.")
         except Exception as e:
             print(f"Could not stop Ollama: {e}")
@@ -94,6 +95,7 @@ def stop_opentts_docker():
 def speak_loop():
     start_ollama()
     start_opentts_docker()
+    list_ollama_models()
     print("Enter prompt for Ollama (type 'exit' to quit):")
     while True:
         try:
