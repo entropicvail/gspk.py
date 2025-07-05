@@ -1,6 +1,6 @@
 # Overview
 
-This script uses ollama and the Google Translate Text-to-Speech to create an on-prem (no network required) ability to have text to speach interactions with an LLM. There is nothing really ground-breaking going on, just a nicer way to interact with an LLM sometimes. Next, I will work on creating a bridge for ollama to interface with a local data-set (like Obsidian notes) to consider during interaction.
+This script uses Ollama and a Docker container running Open Text-to-Speech to create an on-prem (no network required) ability to have text to speach interactions with an LLM. There is nothing really ground-breaking going on, just a nicer way to interact with an LLM sometimes. Next, I will work on creating a RAG for ollama to interface with a local data-set (like Obsidian notes) to consider during interaction.
 
 ## Requirements
 
@@ -25,10 +25,10 @@ sudo apt update && sudo apt install mpg321 -y
 source ./venv/bin/activate
 ```
 ```
-pip install gTTS
+pip install requests
 ```
 
-**Run the program**
+**Run the Program**
 
 Ensure ollama is running in the background by:
 ```
@@ -38,10 +38,15 @@ ollama serve &
 ```
 sudo systemctl start ollama.service
 ```
+Start the Docker Container by:
+```
+docker run -p 5500:5500 synesthesiam/opentts 2>/dev/null &
+```
 
 From inside your venv, run the program by:
 ```
 python gpsk.py
 ```
+*remember to run `source ./venv/bin/activate` if not already done.*
 
-Your prompts into the python environment will be sent to ollama for interpolation, the response will be fed out into an audio file that is automatically played back. The audio file is deleated automatically, but you can comment the corosponding segment out in gspk.py to retain them if desired.
+Your prompts into the python environment will be sent to ollama for interpolation, the response will be fed out into the OTTS container that automatically plays it back.
