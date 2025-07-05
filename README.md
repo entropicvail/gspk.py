@@ -38,10 +38,6 @@ ollama serve &
 ```
 sudo systemctl start ollama.service
 ```
-Start the Docker Container by:
-```
-docker run -p 5500:5500 synesthesiam/opentts 2>/dev/null &
-```
 
 From inside your venv, run the program by:
 ```
